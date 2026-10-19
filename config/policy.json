@@ -1,0 +1,18 @@
+{
+  "version": "1",
+  "applications": {
+    "GitHub": ["github"],
+    "Jira": ["jira"],
+    "Confluence": ["confluence"],
+    "Demo Analytics": ["demo analytics"]
+  },
+  "access_levels": {
+    "Read-only": ["read-only", "read only"],
+    "Standard": ["standard"],
+    "Administrator": ["administrator", "admin"]
+  },
+  "privileged_levels": ["Administrator"],
+  "field_mapping": {},
+  "fulfillment_team": "IT support team",
+  "review_team": "Authorized application owner or security reviewer"
+}

@@ -1,0 +1,13 @@
+*
+!Dockerfile
+!requirements.lock.txt
+!pyproject.toml
+!README.md
+!LICENSE
+!src/
+!src/accessflow/
+!src/accessflow/*.py
+!config/
+!config/*.json
+**/__pycache__
+**/*.egg-info

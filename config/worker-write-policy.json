@@ -1,0 +1,22 @@
+{
+  "version": "example-disabled-v1",
+  "approved": false,
+  "site": "https://your-site.atlassian.net",
+  "project": "AFTEST",
+  "service_desk_id": "7",
+  "request_type_ids": [
+    "12"
+  ],
+  "issue_keys": [
+    "AFTEST-1"
+  ],
+  "summary_prefix": "TEST - AccessFlow M3",
+  "expires_at": "2020-01-01T00:00:00Z",
+  "max_actions": 1,
+  "max_actions_per_poll": 1,
+  "public": false,
+  "operation": "internal_triage_comment",
+  "allowed_outcomes": [
+    "ready_for_human_fulfillment"
+  ]
+}
