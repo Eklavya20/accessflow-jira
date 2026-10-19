@@ -34,6 +34,8 @@ A source-only export was installed in a fresh virtual environment using the lock
 
 Loose token files were moved to restricted Windows LocalAppData storage outside the checkout. The ignored runtime `.env`, journals and raw evidence remain private. Git exclusions now also cover backup directories and common backup/dump patterns. The destination repository was public and empty before the initial commit; commit identity uses GitHub noreply email. Staged files and reachable history are audited before pushing. Publication state and hosted CI are recorded in [publication verification](PUBLICATION.md). Unattended writes remain disabled; Docker remains unverified.
 
+Initial release `4146c23` was published to [Eklavya20/accessflow-jira](https://github.com/Eklavya20/accessflow-jira). The remote commit, complete file tree and README matched the audited local source. [Hosted Windows/Python 3.11 CI run 39332809467](https://github.com/Eklavya20/accessflow-jira/actions/runs/39332809467) completed successfully; its logs confirm **186 passed**, Ruff lint, formatting of 36 Python files and dependency checks. This is fresh-runner offline evidence, separate from the historical live Jira acceptance.
+
 ## Public repository preparation
 
 Publication cleanup added the selected MIT license and a Windows/Python 3.11 offline CI workflow, replaced identifying account/machine/audience context with public examples, and initialized branch `main`. The exact disabled sandbox policy and original presentation documents remain private and ignored; `.env` selects the private policy. Its consumed approval and SQLite state were preserved.

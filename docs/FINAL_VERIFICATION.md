@@ -25,6 +25,7 @@ Current write gates: worker enabled **false**, global dry-run **true**, policy a
 | Existing coverage | Four outcomes, extraction/ADF/requester corrections, scope and permission denial, pagination, retries/rate limits, updates/self-comment loops, locks, persistence, uncertainty/crash scenarios, policy budgets and API authentication |
 | Lint/format | Ruff passed; all 36 Python files passed formatting checks |
 | Dependencies | `pip check` passed; one existing Starlette/AnyIO deprecation warning, no test failures |
+| Published-source reproducibility | October 20 source-only export installed locked dependencies and the package in a fresh local environment; all 186 tests and checks passed. Initial release `4146c23` also passed [hosted Windows/Python 3.11 CI](https://github.com/Eklavya20/accessflow-jira/actions/runs/39332809467); logs independently verified |
 | Credential scan | No current Jira/admin token, account-email or encoded Basic credential match in 67 reviewed source/config/documentation/build files; scanned values were not recorded |
 | Git ignore engine | 21 private path cases ignored; five intended public paths retained, including `.env.example` |
 
