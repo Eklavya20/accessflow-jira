@@ -25,7 +25,7 @@ Requests are classified as ready for human fulfillment, missing information, pri
 
 ## Evidence and limits
 
-- **252 offline tests pass** on this feature branch: the original 186 plus 66 prototype checks, alongside lint, formatting and dependency checks.
+- **254 offline tests pass** on this feature branch: the original 186 plus 68 prototype checks, alongside lint, formatting and dependency checks.
 - Real Jira sandbox tests verified discovery, classification, authorized internal comments, API read-back, duplicate prevention and restart persistence.
 - Native Windows startup, shutdown and recovery instructions were exercised. Docker/Compose is provided but remains **unverified**.
 

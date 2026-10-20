@@ -150,6 +150,7 @@ class GroqExtractor:
     ):
         self.settings, self.cache = settings, cache
         self.transport, self.sleep, self.clock = transport, sleep, clock
+        self.not_before = 0
 
     def extract(self, request, policy, *, synthetic_confirmed=False):
         if not self.settings.accessflow_llm_enabled:
@@ -196,6 +197,8 @@ class GroqExtractor:
                 )
         except (sqlite3.Error, ValueError):
             return result.model_copy(update={"status": "cache_invalid"})
+        if self.clock() < self.not_before:
+            return result.model_copy(update={"status": "provider_deferred"})
         start = self.clock()
         timeout = httpx.Timeout(self.settings.groq_timeout_seconds, connect=3)
         with httpx.Client(
@@ -252,6 +255,8 @@ class GroqExtractor:
                         pass
                     retry = response.status_code == 429 or response.status_code >= 500
                     delay = float(response.headers.get("retry-after", 2**attempt))
+                    if retry and math.isfinite(delay) and delay >= 0:
+                        self.not_before = self.clock() + delay
                     if (
                         not math.isfinite(delay)
                         or delay < 0

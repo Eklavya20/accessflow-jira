@@ -488,3 +488,41 @@ def test_provider_diagnostics_allowlisted_without_error_body(policy, cache, code
     assert result.provider_error_code == expected
     assert "unit-test-credential" not in result.model_dump_json()
     assert "private provider detail" not in result.model_dump_json()
+
+
+def test_long_provider_wait_defers_other_cases_without_sleeping(policy, cache):
+    calls = []
+    current = [100.0]
+
+    def server(req):
+        calls.append(req)
+        return httpx.Response(429, headers={"retry-after": "60"})
+
+    extractor = GroqExtractor(
+        settings(),
+        cache,
+        transport=httpx.MockTransport(server),
+        clock=lambda: current[0],
+        sleep=lambda _: pytest.fail("Long provider wait must fall back, not block evaluation"),
+    )
+    assert extractor.extract(request(), policy, synthetic_confirmed=True).attempts == 1
+    deferred = extractor.extract(
+        request("Another synthetic request."), policy, synthetic_confirmed=True
+    )
+    assert deferred.status == "provider_deferred" and deferred.attempts == 0
+    current[0] = 161
+    assert extractor.extract(request(), policy, synthetic_confirmed=True).attempts == 1
+    assert len(calls) == 2
+
+
+def test_cached_result_remains_available_during_provider_cooldown(policy, cache):
+    extractor = GroqExtractor(
+        settings(),
+        cache,
+        transport=httpx.MockTransport(lambda _: httpx.Response(200, json=response())),
+        clock=lambda: 100.0,
+    )
+    extractor.extract(request(), policy, synthetic_confirmed=True)
+    extractor.not_before = 200.0
+    result = extractor.extract(request(), policy, synthetic_confirmed=True)
+    assert result.cache_hit and result.attempts == 0
