@@ -21,7 +21,7 @@ flowchart LR
 
 Requests are classified as ready for human fulfillment, missing information, privileged review or manual triage. SQLite retains revisions, action intentions, comment IDs and retry state across restarts. Uncertain writes are reconciled rather than blindly resent.
 
-**Dry-run is the default.** Triage write-back adds internal comments only, under exact-comment approval or a separately approved bounded worker policy. Status, assignment, approval decisions and application permissions are outside the implemented write scope. No LLM is used.
+**Dry-run is the default.** Triage write-back adds internal comments only, under exact-comment approval or a separately approved bounded worker policy. Status, assignment, approval decisions and application permissions are outside the implemented write scope. The operational pipeline uses no LLM. A separate [synthetic Groq extraction prototype](docs/GROQ_EVALUATION.md) is disabled, has no worker hook and awaits review.
 
 ## Evidence and limits
 

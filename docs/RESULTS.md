@@ -1,5 +1,7 @@
 # Actual results
 
+Feature-branch experiment, October 20: [Groq extraction evaluation](GROQ_EVALUATION.md) measured 70.8% to 94.2% field correctness on 40 authored synthetic requests, with higher manual triage and provider failures. The readiness gate did not pass; AI stays disabled and separate from the operational pipeline. The original 186 tests are retained; 66 focused prototype cases bring the branch suite to 252. No Jira call or write was made by this experiment. The public `main` branch is not changed by the experiment.
+
 Observed October 19, 2026. **Milestones 1, 2 and 3 pass within the verified sandbox scope, using the tested native Windows fallback.** The background worker automatically discovered/classified AIS-4 in dry-run and AIS-5 under a separately approved one-action policy, posting internal comment `10007`. Independent Jira reads, later polling and a real worker restart verified one matching comment and persistent SQLite state. Unattended writes are now disabled; the healthy worker continues in dry-run. Docker runtime remains untested. This is not a production-readiness claim.
 
 | Measure | Observed result |
